@@ -91,6 +91,18 @@ int main() {
           double py = j[1]["y"];
           double psi = j[1]["psi"];
           double v = j[1]["speed"];
+          double delta = j[1]["steering_angle"];
+          double acceleration = j[1]["throttle"];
+
+
+          //Predict the car's state into the future 100 ms
+         double latency = 0.1; // 100 ms latency
+         v *= 0.44704; // 1 mph == 0.44704 meters per second
+         px += v * cos(psi) * latency;
+         py += v * sin(psi) * latency;
+         psi -= v * delta / 2.67 * latency; //Lf = 2.67
+         v += acceleration * latency;
+         v /= 0.44704;
 
           /*
           * Calculate steering angle and throttle using MPC.
