@@ -130,6 +130,7 @@ int main() {
           double* pt_y = &car_ptsy[0];
           Eigen::Map<Eigen::VectorXd> ptsy_trans(pt_y, 6);
 
+          //set x,y, and angle to zero since we are now in car's coordinates
           px = 0;
           py = 0;
           psi = 0;
@@ -151,10 +152,8 @@ int main() {
           //Solve MPC
           auto vars = mpc.Solve(state, coeffs);
 
-          std::cout << "Steer, throttle " << vars[0] << ", " << vars[1] << std::endl;
-
-          steer_value = vars[0];
-          throttle_value = vars[1];
+          steer_value = get<0>(vars[0]);
+          throttle_value = get<1>(vars[0]);
 
           json msgJson;
 
@@ -171,13 +170,9 @@ int main() {
           //.. add (x,y) points to list here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Green line
 
-          for (unsigned int i = 2; i < vars.size(); i ++) {
-            if (i % 2 == 0) {
-              mpc_x_vals.push_back(vars[i]);
-            }
-            else {
-              mpc_y_vals.push_back(vars[i]);
-            }
+          for (unsigned int i = 1; i < vars.size(); i ++) {
+            mpc_x_vals.push_back(get<0>(vars[i]));
+            mpc_y_vals.push_back(get<1>(vars[i]));
           }
 
           msgJson["mpc_x"] = mpc_x_vals;

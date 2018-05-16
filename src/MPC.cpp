@@ -120,7 +120,7 @@ class FG_eval {
 MPC::MPC() {}
 MPC::~MPC() {}
 
-vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
+vector< tuple<double, double> > MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   bool ok = true;
   typedef CPPAD_TESTVECTOR(double) Dvector;
 
@@ -239,14 +239,12 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   std::cout << "Cost " << cost << std::endl;
 
 
-  vector<double> res;
+  vector< tuple<double,double> > res;
 
-  res.push_back(solution.x[delta_start]);
-  res.push_back(solution.x[a_start]);
+  res.push_back(tuple<double, double> (solution.x[delta_start], solution.x[a_start]));
 
   for(unsigned int i=0; i < N-1; i++){
-    res.push_back(solution.x[x_start + 1 + i]);
-    res.push_back(solution.x[y_start + 1 + i]);
+    res.push_back(tuple<double, double>(solution.x[x_start + 1 + i], solution.x[y_start + 1 + i]));
   }
 
   std::cout << "Res " << res.data() << std::endl;
