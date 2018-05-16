@@ -3,7 +3,7 @@ Self-Driving Car Engineer Nanodegree Program
 
 [//]: # (Image References)
 [image1]: ./media/kinematic.png
-[image2]: ./media/youtube.png
+[image2]: ./media/youtube.jpg
 
 ## Introduction
 This project implements Model Predictive Control to drive a vehicle around the track using a simulator.
@@ -13,7 +13,7 @@ The project relies on third party libraries `Ipopt` and `CppAD`. `Ipopt` is a to
 ## Implementation
 ### Model
 
-We use the kinematic vehicle model which uses vehicle `x` and `y` coordinates, angle `psi`, speed `v`, cross-track and orientation errors. The output of the model are optimal `steering` and `throttle` values.
+We use the kinematic vehicle model which takes vehicle `x` and `y` coordinates, angle `psi`, speed `v`, cross-track and orientation errors as input. The output of the model are optimal `steering` and `throttle` values.
 
 ![kinematic mode equations][image1]
 
