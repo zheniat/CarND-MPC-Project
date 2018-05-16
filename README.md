@@ -1,17 +1,21 @@
 # CarND-Controls-MPC
 Self-Driving Car Engineer Nanodegree Program
 
+[//]: # (Image References)
+[image1]: ./media/kinematic.png
+[image2]: ./media/youtube.png
+
 ## Introduction
 This project implements Model Predictive Control to drive a vehicle around the track using a simulator.
 
 The project relies on third party libraries `Ipopt` and `CppAD`. `Ipopt` is a tool used to optimize the control inputs (throttle and steering angle) to find locally optimal values solving a non-linear problem. `CppAD` is a library used to perform automatic differentiation.
----
+
 ## Implementation
 ### Model
 
 We use the kinematic vehicle model which uses vehicle `x` and `y` coordinates, angle `psi`, speed `v`, cross-track and orientation errors. The output of the model are optimal `steering` and `throttle` values.
 
-![kinematic model equations](media/kinematic.png)
+![kinematic mode equations][image1]
 
 The model applies constraints on actuator values to keep angle and throttle within a reasonable range.
 
@@ -32,4 +36,4 @@ In order to simplify calculations the waypoints were transformed from the global
 
 The vehicle was able to successfully drive around the track at ~70 mph.
 
-[![drive around the lap](media/youtube.jpg)](https://www.youtube.com/watch?v=lX50i6LChsI)
+[![drive around the lap][image2]](https://www.youtube.com/watch?v=lX50i6LChsI)
