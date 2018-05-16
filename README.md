@@ -13,7 +13,7 @@ The project relies on third party libraries `Ipopt` and `CppAD`. `Ipopt` is a to
 ## Implementation
 ### Model
 
-We use the kinematic vehicle model which takes vehicle `x` and `y` coordinates, angle `psi`, speed `v`, cross-track and orientation errors as input. The output of the model are optimal `steering` and `throttle` values.
+We use the kinematic vehicle model which takes vehicle `x` and `y` coordinates, angle `psi`, speed `v`, cross-track `cte` and orientation `epsi` errors as input. The output of the model are optimal `steering` and `throttle` values.
 
 ![kinematic mode equations][image1]
 
